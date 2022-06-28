@@ -4,28 +4,27 @@ import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class NasaPics implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'NASA Pics',
+		displayName: 'NASA Pics 3',
 		name: 'nasapics',
 		icon: 'file:nasapics.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Get data from NASAs APOD API',
+		description: 'Get data from NASAs APOD and Mars Rover APIs',
 		defaults: {
-			name: 'APOD',
+			name: 'NASA Pics',
 			color: '#0b3d91',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		credentials: [
 			{
-				name: 'NasaPicsApi',
+				name: 'nasapicsApi',
 				required: true,
 			},
 		],
 		requestDefaults: {
 			baseURL: 'https://api.nasa.gov',
-			url: '',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',

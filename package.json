@@ -28,10 +28,10 @@
   ],
   "n8n": {
     "credentials": [
-      "dist/credentials/nasapicsApi.credentials.js"
+      "dist/credentials/NasaPicsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/nasapics/nasapics.node.js"
+      "dist/nodes/nasapics/NasaPics.node.js"
     ]
   },
   "devDependencies": {
