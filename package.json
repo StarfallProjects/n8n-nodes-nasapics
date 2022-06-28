@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-starter",
+  "name": "n8n-nodes-nasapics",
   "version": "0.1.0",
-  "description": "Example starter module for custom n8n nodes.",
+  "description": "n8n node to call NASA's nasapics and Mars Rover Photo services.",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "https://n8n.io",
   "author": {
-    "name": "Jan Oberhauser",
-    "email": "jan@n8n.io"
+    "name": "<your-name>",
+    "email": "test@test.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/n8n-io/n8n-nodes-starter.git"
+    "url": "git+<your-repo-url>"
   },
   "main": "index.js",
   "scripts": {
@@ -28,12 +28,10 @@
   ],
   "n8n": {
     "credentials": [
-      "dist/credentials/ExampleCredentials.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/nasapicsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/nasapics/nasapics.node.js"
     ]
   },
   "devDependencies": {
