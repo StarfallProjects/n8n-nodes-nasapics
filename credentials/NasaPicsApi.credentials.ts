@@ -1,5 +1,5 @@
 import {
-	IAuthenticateQueryAuth,
+	IAuthenticateGeneric,
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
@@ -17,10 +17,14 @@ export class NasaPicsApi implements ICredentialType {
 		},
 	];
 	authenticate = {
-		type: 'queryAuth',
+		type: 'generic',
 		properties: {
-			key: 'api_key',
-			value: '={{$credentials.apiKey}}',
+			qs: {
+				'api_key': '={{$credentials.apiKey}}'
+			}
+
 		},
-	} as IAuthenticateQueryAuth;
+	} as IAuthenticateGeneric;
 }
+
+// note to self: need to update dependencies to use generic

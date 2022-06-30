@@ -48,6 +48,7 @@ export class NasaPics implements INodeType {
 				],
 				default: 'astronomyPictureOfTheDay',
 			},
+			// Get today's picture
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -75,6 +76,31 @@ export class NasaPics implements INodeType {
 				],
 				default: 'get'
 			},
+			// An additional field to add a date to the APOD query
+			// Allows retrieval of images from other days
+			{
+				displayName: 'Additional Fields',
+				name: 'additionalFields',
+				type: 'dateTime',
+				default: '',
+				description: 'The date of the image you want to get',
+				displayOptions: {
+					show: {
+						resource: [
+							'astronomyPictureOfTheDay'
+						],
+						operation: [
+							'get'
+						]
+					}
+				},
+				routing: {
+					request: {
+						method: 'GET',
+						url: ''
+					}
+				}				
+			},
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -95,12 +121,33 @@ export class NasaPics implements INodeType {
 						routing: {
 							request: {
 								method: 'GET',
-								url: '/mars-photos/api/v1/curiosity/photos'
+								url: '/mars-photos/api/v1/={{roverName}}/photos'
 							}
 						}
 					}
 				],
 				default: 'get'
+			},
+			{
+				displayName: 'Rover name',
+				description: 'Choose which Mars Rover to get a photo from',
+				required: true,
+				name: 'roverName',
+				type: 'options',
+				options: [
+					{name: 'Curiosity', value: 'curiosity'},
+					{name: 'Opportunity', value: 'opportunity'},
+					{name: 'Perseverance', value: 'perseverance'},
+					{name: 'Spirit', value: 'spirit'}
+				],
+				default: 'curiosity',
+				displayOptions: {
+					show: {
+						resource: [
+							'marsRoverPhotos'
+						]
+					}
+				}
 			}
 		],
 	};
