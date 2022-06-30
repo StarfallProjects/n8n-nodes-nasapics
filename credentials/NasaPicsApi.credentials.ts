@@ -26,5 +26,3 @@ export class NasaPicsApi implements ICredentialType {
 		},
 	} as IAuthenticateGeneric;
 }
-
-// note to self: need to update dependencies to use generic

@@ -158,7 +158,7 @@ export class NasaPics implements INodeType {
 						}		
 					}
 				],									
-			},
+			}
 		],
 	};
 }
