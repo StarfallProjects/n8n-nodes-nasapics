@@ -4,7 +4,7 @@ import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class NasaPics implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'NASA Pics 3',
+		displayName: 'NASA Pics',
 		name: 'nasapics',
 		icon: 'file:nasapics.svg',
 		group: ['transform'],
@@ -96,7 +96,7 @@ export class NasaPics implements INodeType {
 						routing: {
 							request: {
 								method: 'GET',
-								url: '={{ "/mars-photos/api/v1/" + roverName + "/photos" }}'
+								url: '=/mars-photos/api/v1/rovers/{{$parameter.roverName}}/photos'
 							}
 						}
 					}
@@ -123,6 +123,29 @@ export class NasaPics implements INodeType {
 						]
 					}
 				}
+			},
+			{
+				displayName: 'Date',
+				description: 'Earth date',
+				required: true,
+				name: 'marsRoverDate',
+				type: 'dateTime',
+				default:'',
+				displayOptions: {
+					show: {
+						resource: [
+							'marsRoverPhotos'
+						]
+					}
+				},
+				routing: {
+					request: {
+						// You've already set up the URL. qs appends the value of the field as a query string
+						qs: {
+							earth_date: '={{ new Date($value).toISOString().substr(0,10) }}'
+						}
+					}
+				}	
 			},
 			// An additional field to add a date to the APOD query
 			// Allows retrieval of images from other days
