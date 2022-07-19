@@ -1,25 +1,22 @@
-/* eslint-disable n8n-nodes-base/filesystem-wrong-node-filename */
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
-
 
 export class NasaPics implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'NASA Pics',
-		name: 'nasapics',
+		name: 'NasaPics',
 		icon: 'file:nasapics.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Get data from NASAs APOD and Mars Rover APIs',
+		description: 'Get data from NASAs API',
 		defaults: {
 			name: 'NASA Pics',
-			color: '#0b3d91',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		credentials: [
 			{
-				name: 'nasapicsApi',
+				name: 'NasaPicsApi',
 				required: true,
 			},
 		],
@@ -43,12 +40,11 @@ export class NasaPics implements INodeType {
 					},
 					{
 						name: 'Mars Rover Photos',
-						value: 'marsRoverPhotos'
-					}
+						value: 'marsRoverPhotos',
+					},
 				],
 				default: 'astronomyPictureOfTheDay',
 			},
-			// Get today's picture
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -57,24 +53,25 @@ export class NasaPics implements INodeType {
 				displayOptions: {
 					show: {
 						resource: [
-							'astronomyPictureOfTheDay'
-						]
-					}
+							'astronomyPictureOfTheDay',
+						],
+					},
 				},
 				options: [
 					{
 						name: 'Get',
 						value: 'get',
+						action: 'Get the APOD',
 						description: 'Get the Astronomy Picture of the day',
 						routing: {
 							request: {
 								method: 'GET',
-								url: '/planetary/apod'
-							}
-						}
-					}
+								url: '/planetary/apod',
+							},
+						},
+					},
 				],
-				default: 'get'
+				default: 'get',
 			},
 			{
 				displayName: 'Operation',
@@ -84,24 +81,25 @@ export class NasaPics implements INodeType {
 				displayOptions: {
 					show: {
 						resource: [
-							'marsRoverPhotos'
-						]
-					}
+							'marsRoverPhotos',
+						],
+					},
 				},
 				options: [
 					{
 						name: 'Get',
 						value: 'get',
+										action: 'Get Mars Rover photos',
 						description: 'Get photos from the Mars Rover',
 						routing: {
 							request: {
 								method: 'GET',
-								url: '=/mars-photos/api/v1/rovers/{{$parameter.roverName}}/photos'
-							}
-						}
-					}
+								url: '=/mars-photos/api/v1/rovers/{{$parameter.roverName}}/photos',
+							},
+						},
+					},
 				],
-				default: 'get'
+				default: 'get',
 			},
 			{
 				displayName: 'Rover name',
@@ -113,16 +111,16 @@ export class NasaPics implements INodeType {
 					{name: 'Curiosity', value: 'curiosity'},
 					{name: 'Opportunity', value: 'opportunity'},
 					{name: 'Perseverance', value: 'perseverance'},
-					{name: 'Spirit', value: 'spirit'}
+					{name: 'Spirit', value: 'spirit'},
 				],
 				default: 'curiosity',
 				displayOptions: {
 					show: {
 						resource: [
-							'marsRoverPhotos'
-						]
-					}
-				}
+							'marsRoverPhotos',
+						],
+					},
+				},
 			},
 			{
 				displayName: 'Date',
@@ -134,21 +132,19 @@ export class NasaPics implements INodeType {
 				displayOptions: {
 					show: {
 						resource: [
-							'marsRoverPhotos'
-						]
-					}
+							'marsRoverPhotos',
+						],
+					},
 				},
 				routing: {
 					request: {
 						// You've already set up the URL. qs appends the value of the field as a query string
 						qs: {
-							earth_date: '={{ new Date($value).toISOString().substr(0,10) }}'
-						}
-					}
-				}	
+							earth_date: '={{ new Date($value).toISOString().substr(0,10) }}',
+						},
+					},
+				},	
 			},
-			// An additional field to add a date to the APOD query
-			// Allows retrieval of images from other days
 			{
 				displayName: 'Additional Fields',
 				name: 'additionalFields',
@@ -158,12 +154,12 @@ export class NasaPics implements INodeType {
 				displayOptions: {
 					show: {
 						resource: [
-							'astronomyPictureOfTheDay'
+							'astronomyPictureOfTheDay',
 						],
 						operation: [
-							'get'
-						]
-					}
+							'get',
+						],
+					},
 				},
 				options: [
 					{
@@ -175,13 +171,13 @@ export class NasaPics implements INodeType {
 							request: {
 								// You've already set up the URL. qs appends the value of the field as a query string
 								qs: {
-									date: '={{ new Date($value).toISOString().substr(0,10) }}'
-								}
-							}
-						}		
-					}
+									date: '={{ new Date($value).toISOString().substr(0,10) }}',
+								},
+							},
+						},		
+					},
 				],									
-			}
+			},
 		],
 	};
 }
