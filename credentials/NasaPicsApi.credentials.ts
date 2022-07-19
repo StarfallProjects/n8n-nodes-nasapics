@@ -6,7 +6,7 @@ import {
 
 export class NasaPicsApi implements ICredentialType {
 
-	name = 'NasaPicsApi';
+	name = 'nasaPicsApi';
 	displayName = 'NASA Pics API';
 	// Uses the link to this tutorial as an example
 	// Replace with your own docs links when building your own nodes
