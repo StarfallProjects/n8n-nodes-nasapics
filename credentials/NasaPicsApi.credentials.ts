@@ -5,7 +5,6 @@ import {
 } from 'n8n-workflow';
 
 export class NasaPicsApi implements ICredentialType {
-
 	name = 'nasaPicsApi';
 	displayName = 'NASA Pics API';
 	// Uses the link to this tutorial as an example
