@@ -94,7 +94,6 @@ export class NasaPics implements INodeType {
 						routing: {
 							request: {
 								method: 'GET',
-								url: '=/mars-photos/api/v1/rovers/{{$parameter.roverName}}/photos',
 							},
 						},
 					},
@@ -113,6 +112,11 @@ export class NasaPics implements INodeType {
 					{name: 'Perseverance', value: 'perseverance'},
 					{name: 'Spirit', value: 'spirit'},
 				],
+				routing: {
+					request: {
+						url: '=/mars-photos/api/v1/rovers/{{$value}}/photos',
+					},
+				},
 				default: 'curiosity',
 				displayOptions: {
 					show: {
@@ -143,7 +147,7 @@ export class NasaPics implements INodeType {
 							earth_date: '={{ new Date($value).toISOString().substr(0,10) }}',
 						},
 					},
-				},	
+				},
 			},
 			{
 				displayName: 'Additional Fields',
@@ -174,9 +178,9 @@ export class NasaPics implements INodeType {
 									date: '={{ new Date($value).toISOString().substr(0,10) }}',
 								},
 							},
-						},		
+						},
 					},
-				],									
+				],
 			},
 		],
 	};
